@@ -1,0 +1,10 @@
+server:
+  addr: 0.0.0.0:9091
+  readTimeOut: 3s
+  writeTimeOut: 3s
+  idleTimeOut: 100s
+mysql:
+  - instance: default
+    dsn: root:123456@tcp(127.0.0.1:3306)/mall?charset=utf8mb4&loc=Local&parseTime=True&timeout=3s
+    trace_log: true
+    slow_threshold: 100
