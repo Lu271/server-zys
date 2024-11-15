@@ -7,6 +7,7 @@ var GlobalConfig MallConfig
 type MallConfig struct {
 	Server ServerConfig  `mapstructure:"server"`
 	Mysql  []MysqlConfig `mapstructure:"mysql"`
+	Logger LoggerConfig  `mapstructure:"logger"`
 }
 
 type ServerConfig struct {
@@ -21,4 +22,9 @@ type MysqlConfig struct {
 	Dsn           string        `mapstructure:"dsn"`
 	TraceLog      bool          `mapstructure:"trace_log"`
 	SlowThreshold time.Duration `mapstructure:"slow_threshold"`
+}
+
+type LoggerConfig struct {
+	LogFile  string `mapstructure:"logFile"`
+	LogLevel string `mapstructure:"logLevel"`
 }

@@ -4,12 +4,19 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"os"
+	"server-zys/internal/core"
+	"server-zys/logs"
 )
 
 var rootCmd = &cobra.Command{
 	Use:   "mall",
 	Short: "CLI",
 	Long:  "CLI for interacting with mall",
+}
+
+func init() {
+	core.InitConfig(config)
+	logs.InitLogger()
 }
 
 func Execute() {
