@@ -22,14 +22,12 @@ func init() {
 }
 
 func startWebServer(cmd *cobra.Command, args []string) {
-	// 初始化配置
-	err := core.InitConfig(config)
 	fmt.Println(fmt.Sprintf("listen %v, start web server ......", core.GlobalConfig.Server.Addr))
 
 	engine := gin.New()
 	router.RegisterRouter(engine)
 	server := initServer(engine)
-	err = server.ListenAndServe()
+	err := server.ListenAndServe()
 	if err != nil {
 		fmt.Println(err)
 	}

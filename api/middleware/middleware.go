@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"github.com/spf13/cast"
 	"io"
 	"log"
@@ -14,6 +15,15 @@ import (
 )
 
 const size = 64 << 10
+
+func Context(c *gin.Context) {
+	traceId := c.GetHeader("traceId")
+	if len(traceId) <= 0 {
+		traceId = uuid.New().String()
+	}
+	c.Set("traceId", traceId)
+	c.Set("startTime", time.Now().UnixNano())
+}
 
 func CheckLogin(c *gin.Context) {
 	token := c.GetHeader("mall-auth-token")

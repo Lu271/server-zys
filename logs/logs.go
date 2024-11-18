@@ -1,7 +1,9 @@
 package logs
 
 import (
+	"context"
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
+	"github.com/spf13/cast"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"io"
@@ -12,6 +14,42 @@ import (
 )
 
 var logging *zap.SugaredLogger
+
+func InitLogger() {
+	logWriter, _ := GetWriter(core.GlobalConfig.Logger.LogFile)
+
+	fileCore := zapcore.NewCore(GetEncoder(zapcore.CapitalLevelEncoder), zapcore.AddSync(logWriter), LogLevel(core.GlobalConfig.Logger.LogLevel))
+	consoleCore := zapcore.NewCore(GetEncoder(zapcore.CapitalColorLevelEncoder), zapcore.AddSync(os.Stdout), LogLevel(core.GlobalConfig.Logger.LogLevel))
+
+	tee := zapcore.NewTee(fileCore, consoleCore)
+	log := zap.New(tee, zap.AddCaller())
+	logging = log.Sugar()
+	return
+}
+
+func Info(ctx context.Context, log string) {
+	WithContext(ctx).Infof(log)
+}
+
+func Warn(ctx context.Context, log string) {
+	WithContext(ctx).Warnf(log)
+}
+
+func Debug(ctx context.Context, log string) {
+	WithContext(ctx).Debugf(log)
+}
+
+func Error(ctx context.Context, log string) {
+	WithContext(ctx).Errorf(log)
+}
+
+func WithContext(ctx context.Context) *zap.SugaredLogger {
+	if ctx == nil {
+		return logging
+	}
+	duration := (time.Now().UnixNano() - cast.ToInt64(ctx.Value("startTime"))) / int64(time.Millisecond)
+	return logging.With("duration", duration).With("traceId", ctx.Value("traceId"))
+}
 
 // GetWriter 支持日志定时切割
 func GetWriter(filename string) (logf io.Writer, err error) {
@@ -55,33 +93,4 @@ func LogLevel(level string) (LogLevel zapcore.Level) {
 		LogLevel = zapcore.InfoLevel // 默认返回 InfoLevel
 	}
 	return
-}
-
-func InitLogger() {
-	logWriter, _ := GetWriter(core.GlobalConfig.Logger.LogFile)
-
-	fileCore := zapcore.NewCore(GetEncoder(zapcore.CapitalLevelEncoder), zapcore.AddSync(logWriter), LogLevel(core.GlobalConfig.Logger.LogLevel))
-	consoleCore := zapcore.NewCore(GetEncoder(zapcore.CapitalColorLevelEncoder), zapcore.AddSync(os.Stdout), LogLevel(core.GlobalConfig.Logger.LogLevel))
-
-	tee := zapcore.NewTee(fileCore, consoleCore)
-	log := zap.New(tee, zap.AddCaller())
-	logging = log.Sugar()
-	logging.Infof("log init success")
-	return
-}
-
-func Info(log string) {
-	logging.Infof(log)
-}
-
-func Warn(log string) {
-	logging.Warnf(log)
-}
-
-func Debug(log string) {
-	logging.Debugf(log)
-}
-
-func Error(log string) {
-	logging.Errorf(log)
 }

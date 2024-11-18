@@ -14,6 +14,7 @@ func RegisterRouter(router *gin.Engine) {
 		middleware.RecoverMiddleware,
 		middleware.CheckLogin,
 		middleware.AccessLogger,
+		middleware.Context,
 	)
 
 	// 管理后台相关路由
@@ -34,4 +35,5 @@ func RegisterApiRouter(router *gin.RouterGroup) {
 		c.JSON(http.StatusOK, httputils.SuccessWithData(r))
 		return
 	})
+	router.POST("/login", controller.UserLogin)
 }

@@ -14,10 +14,27 @@ func GetUserInfo(c *gin.Context) {
 	var req = entity.GetUserInfoReq{}
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
-		logs.Error(fmt.Sprintf("get user info err: %v", err.Error()))
+		logs.Error(c, fmt.Sprintf("get user info err: %v", err.Error()))
 		c.JSON(http.StatusOK, httputils.Error(err))
 		return
 	}
-	logs.Info("get user info success")
+	logs.Info(c, "get user info success")
 	c.JSON(http.StatusOK, httputils.SuccessWithData(service.GetUserInfo(req.UserId)))
+}
+
+func UserLogin(c *gin.Context) {
+	var req = entity.LoginReq{}
+	err := c.ShouldBindJSON(&req)
+	if err != nil {
+		logs.Error(c, fmt.Sprintf("get login info err: %v", err.Error()))
+		c.JSON(http.StatusOK, httputils.Error(err))
+		return
+	}
+
+	resp, err := service.UserLogin(c, req)
+	if err != nil {
+		c.JSON(http.StatusOK, httputils.Error(err))
+		return
+	}
+	c.JSON(http.StatusOK, httputils.SuccessWithData(resp))
 }
