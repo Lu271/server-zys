@@ -8,6 +8,11 @@ mysql:
     dsn: root:123456@tcp(127.0.0.1:3306)/mall?charset=utf8mb4&loc=Local&parseTime=True&timeout=3s
     trace_log: true
     slow_threshold: 100
+redis:
+  addr: 127.0.0.1:6379
+  dialTimeOut: 100
+  readTimeOut: 100
+  writeTimeOut: 100
 logger:
   logFile: log_files/mall.log
   logLevel: debug

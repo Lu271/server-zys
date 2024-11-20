@@ -8,6 +8,7 @@ type MallConfig struct {
 	Server ServerConfig  `mapstructure:"server"`
 	Mysql  []MysqlConfig `mapstructure:"mysql"`
 	Logger LoggerConfig  `mapstructure:"logger"`
+	Redis  RedisConfig   `mapstructure:"redis"`
 }
 
 type ServerConfig struct {
@@ -22,6 +23,13 @@ type MysqlConfig struct {
 	Dsn           string        `mapstructure:"dsn"`
 	TraceLog      bool          `mapstructure:"trace_log"`
 	SlowThreshold time.Duration `mapstructure:"slow_threshold"`
+}
+
+type RedisConfig struct {
+	Addr         string `mapstructure:"addr"`
+	DialTimeOut  int    `mapstructure:"dialTimeOut"`
+	ReadTimeOut  int    `mapstructure:"readTimeOut"`
+	WriteTimeOut int    `mapstructure:"writeTimeOut"`
 }
 
 type LoggerConfig struct {

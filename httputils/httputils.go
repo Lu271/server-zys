@@ -1,5 +1,13 @@
 package httputils
 
+import (
+	"context"
+	"fmt"
+	"github.com/go-resty/resty/v2"
+	"server-zys/logs"
+	"time"
+)
+
 var (
 	defaultCode = -1
 	defaultMsg  = "unknown error"
@@ -40,4 +48,34 @@ func Error(err error) interface{} {
 		Code: code,
 		Msg:  msg,
 	}
+}
+
+func Get(ctx context.Context, url string, header, data map[string]string) ([]byte, error) {
+	context.WithTimeout(ctx, 3*time.Second)
+	client := resty.New()
+	resp, err := client.R().
+		SetHeaders(header).
+		SetQueryParams(data).
+		Get(url)
+	if err != nil {
+		logs.Error(ctx, fmt.Sprintf("Http Get Error, url: %s, err: %s", url, err.Error()))
+		return nil, err
+	}
+
+	return resp.Body(), nil
+}
+
+func Post(ctx context.Context, url string, header map[string]string, data interface{}) ([]byte, error) {
+	context.WithTimeout(ctx, 3*time.Second)
+	client := resty.New()
+	resp, err := client.R().
+		SetHeaders(header).
+		SetBody(data).
+		Post(url)
+
+	if err != nil {
+		logs.Error(ctx, fmt.Sprintf("Http Post Error, url: %s, err: %s", url, err.Error()))
+		return nil, err
+	}
+	return resp.Body(), nil
 }
