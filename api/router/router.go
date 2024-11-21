@@ -10,6 +10,10 @@ import (
 )
 
 func RegisterRouter(router *gin.Engine) {
+	router.Use(
+		middleware.Qps,
+		middleware.Delay,
+	)
 	router.GET("/metrics", controller.Metrics)
 
 	router.Use(
