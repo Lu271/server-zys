@@ -3,6 +3,8 @@ package middleware
 import (
 	"bytes"
 	"fmt"
+	"github.com/alibaba/sentinel-golang/api"
+	"github.com/alibaba/sentinel-golang/core/base"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"github.com/spf13/cast"
@@ -67,4 +69,22 @@ func AccessLogger(c *gin.Context) {
 	msg := fmt.Sprintf("method:%v uri:%v req_body:%v status_code:%v latency:%v",
 		reqMethod, reqUri, cast.ToString(body), statusCode, latencyTime)
 	fmt.Println(msg)
+}
+
+func SentinelMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		resourceName := c.Request.Method + ":" + c.FullPath()
+		entry, err := api.Entry(
+			resourceName,
+			api.WithResourceType(base.ResTypeWeb),
+			api.WithTrafficType(base.Inbound),
+		)
+		// 拒绝请求
+		if err != nil {
+			c.AbortWithStatus(http.StatusTooManyRequests)
+			return
+		}
+		defer entry.Exit()
+		c.Next()
+	}
 }

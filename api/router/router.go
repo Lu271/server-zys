@@ -10,11 +10,14 @@ import (
 )
 
 func RegisterRouter(router *gin.Engine) {
+	router.GET("/metrics", controller.Metrics)
+
 	router.Use(
 		middleware.RecoverMiddleware,
 		middleware.CheckLogin,
 		middleware.AccessLogger,
 		middleware.Context,
+		middleware.SentinelMiddleware(),
 	)
 
 	// 管理后台相关路由

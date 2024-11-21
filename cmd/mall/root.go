@@ -17,6 +17,7 @@ var rootCmd = &cobra.Command{
 func init() {
 	core.InitConfig(config)
 	logs.InitLogger()
+	core.InitSentinel()
 }
 
 func Execute() {

@@ -3,6 +3,7 @@ package controller
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"net/http"
 	"server-zys/httputils"
 	"server-zys/internal/entity"
@@ -37,4 +38,9 @@ func UserLogin(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, httputils.SuccessWithData(resp))
+}
+
+func Metrics(c *gin.Context) {
+	handler := promhttp.Handler()
+	handler.ServeHTTP(c.Writer, c.Request)
 }
