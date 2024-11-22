@@ -1,4 +1,4 @@
-module server-zys
+module github.com/Lu271/server-zys
 
 go 1.20
 
