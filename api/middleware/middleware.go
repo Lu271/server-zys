@@ -3,6 +3,7 @@ package middleware
 import (
 	"bytes"
 	"fmt"
+	"github.com/Lu271/server-zys/httputils"
 	"github.com/alibaba/sentinel-golang/api"
 	"github.com/alibaba/sentinel-golang/core/base"
 	"github.com/gin-gonic/gin"
@@ -12,7 +13,6 @@ import (
 	"log"
 	"net/http"
 	"runtime"
-	"server-zys/httputils"
 	"time"
 )
 

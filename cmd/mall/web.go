@@ -2,11 +2,11 @@ package mall
 
 import (
 	"fmt"
+	"github.com/Lu271/server-zys/api/router"
+	"github.com/Lu271/server-zys/internal/core"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
 	"net/http"
-	"server-zys/api/router"
-	"server-zys/internal/core"
 )
 
 var config string

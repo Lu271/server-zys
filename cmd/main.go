@@ -1,6 +1,6 @@
 package main
 
-import "server-zys/cmd/mall"
+import "github.com/Lu271/server-zys/cmd/mall"
 
 func main() {
 	mall.Execute()

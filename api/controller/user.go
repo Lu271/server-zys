@@ -2,13 +2,13 @@ package controller
 
 import (
 	"fmt"
+	"github.com/Lu271/server-zys/httputils"
+	"github.com/Lu271/server-zys/internal/entity"
+	"github.com/Lu271/server-zys/internal/service"
+	"github.com/Lu271/server-zys/logs"
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"net/http"
-	"server-zys/httputils"
-	"server-zys/internal/entity"
-	"server-zys/internal/service"
-	"server-zys/logs"
 )
 
 func SayHello(c *gin.Context) {

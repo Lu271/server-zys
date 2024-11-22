@@ -4,11 +4,11 @@ import (
 	"context"
 	"github.com/Lu271/rpc-test/hello-server/kitex_gen/hello"
 	"github.com/Lu271/rpc-test/hello-server/kitex_gen/hello/helloservice"
+	"github.com/Lu271/server-zys/internal/dao"
+	"github.com/Lu271/server-zys/internal/entity"
 	"github.com/cloudwego/kitex/client"
 	etcd "github.com/kitex-contrib/registry-etcd"
 	"math/rand"
-	"server-zys/internal/dao"
-	"server-zys/internal/entity"
 	"strconv"
 	"time"
 )

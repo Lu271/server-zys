@@ -2,7 +2,7 @@ package dao
 
 import (
 	"context"
-	"server-zys/internal/entity"
+	"github.com/Lu271/server-zys/internal/entity"
 )
 
 const (

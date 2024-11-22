@@ -3,12 +3,12 @@ package mall
 import (
 	"context"
 	"fmt"
+	"github.com/Lu271/server-zys/logs"
 	"github.com/alibaba/sentinel-golang/api"
 	"github.com/alibaba/sentinel-golang/core/base"
 	"github.com/alibaba/sentinel-golang/core/flow"
 	"github.com/alibaba/sentinel-golang/util"
 	"github.com/spf13/cobra"
-	"server-zys/logs"
 	"time"
 )
 

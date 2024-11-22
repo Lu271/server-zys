@@ -4,10 +4,10 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/Lu271/server-zys/logs"
 	"github.com/alibaba/sentinel-golang/api"
 	"github.com/alibaba/sentinel-golang/core/base"
 	"github.com/go-resty/resty/v2"
-	"server-zys/logs"
 	"time"
 )
 

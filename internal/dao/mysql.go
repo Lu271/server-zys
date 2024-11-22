@@ -1,9 +1,9 @@
 package dao
 
 import (
+	"github.com/Lu271/server-zys/internal/core"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"server-zys/internal/core"
 	"sync"
 )
 

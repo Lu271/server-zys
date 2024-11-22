@@ -2,10 +2,10 @@ package mall
 
 import (
 	"fmt"
+	"github.com/Lu271/server-zys/internal/core"
+	"github.com/Lu271/server-zys/logs"
 	"github.com/spf13/cobra"
 	"os"
-	"server-zys/internal/core"
-	"server-zys/logs"
 )
 
 var rootCmd = &cobra.Command{

@@ -2,13 +2,13 @@ package logs
 
 import (
 	"context"
+	"github.com/Lu271/server-zys/internal/core"
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
 	"github.com/spf13/cast"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"io"
 	"os"
-	"server-zys/internal/core"
 	"strings"
 	"time"
 )

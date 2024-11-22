@@ -1,12 +1,12 @@
 package router
 
 import (
+	"github.com/Lu271/server-zys/api/controller"
+	"github.com/Lu271/server-zys/api/middleware"
+	"github.com/Lu271/server-zys/httputils"
 	"github.com/gin-gonic/gin"
 	"math/rand"
 	"net/http"
-	"server-zys/api/controller"
-	"server-zys/api/middleware"
-	"server-zys/httputils"
 )
 
 func RegisterRouter(router *gin.Engine) {

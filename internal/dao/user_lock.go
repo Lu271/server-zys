@@ -3,8 +3,8 @@ package dao
 import (
 	"context"
 	"fmt"
-	"server-zys/internal/constant"
-	"server-zys/logs"
+	"github.com/Lu271/server-zys/internal/constant"
+	"github.com/Lu271/server-zys/logs"
 	"time"
 )
 
