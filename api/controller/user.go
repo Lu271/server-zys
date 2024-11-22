@@ -11,6 +11,15 @@ import (
 	"server-zys/logs"
 )
 
+func SayHello(c *gin.Context) {
+	resp, err := service.SayHello(c)
+	if err != nil {
+		c.JSON(http.StatusOK, httputils.Error(err))
+		return
+	}
+	c.JSON(http.StatusOK, httputils.SuccessWithData(resp))
+}
+
 func GetUserInfo(c *gin.Context) {
 	var req = entity.GetUserInfoReq{}
 	err := c.ShouldBindJSON(&req)

@@ -43,4 +43,5 @@ func RegisterApiRouter(router *gin.RouterGroup) {
 		return
 	})
 	router.POST("/login", controller.UserLogin)
+	router.GET("/say/hello", controller.SayHello)
 }
