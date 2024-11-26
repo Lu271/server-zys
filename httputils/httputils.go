@@ -42,7 +42,8 @@ func Error(err error) interface{} {
 
 	if err != nil {
 		msg = err.Error()
-		if codeErr, ok := err.(CodeError); ok {
+		var codeErr CodeError
+		if errors.As(err, &codeErr) {
 			code = codeErr.Code()
 		}
 	}

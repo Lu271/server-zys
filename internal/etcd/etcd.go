@@ -2,6 +2,7 @@ package etcd
 
 import (
 	hello "github.com/Lu271/rpc-test/hello-server/kitex_gen/hello/helloservice"
+	"github.com/Lu271/server-zys/api/middleware"
 	"github.com/cloudwego/kitex/client"
 	etcd "github.com/kitex-contrib/registry-etcd"
 	"sync"
@@ -27,5 +28,6 @@ func initEtcd() {
 	r, _ := etcd.NewEtcdResolver([]string{"127.0.0.1:2379"})
 
 	// 初始化 RPC 客户端对象
-	etcdCli = hello.MustNewClient("hello", client.WithResolver(r))
+	etcdCli = hello.MustNewClient("hello", client.WithResolver(r),
+		client.WithMiddleware(middleware.LogMiddleware))
 }
