@@ -16,6 +16,9 @@ func RegisterRouter(router *gin.Engine) {
 	)
 	router.GET("/metrics", controller.Metrics)
 
+	// ws
+	router.GET("/ws", controller.InitHandler)
+
 	router.Use(
 		middleware.RecoverMiddleware,
 		middleware.CheckLogin,
@@ -30,6 +33,7 @@ func RegisterRouter(router *gin.Engine) {
 	// 用户侧路由
 	api := router.Group("/api")
 	RegisterApiRouter(api)
+
 }
 
 func RegisterAdminRouter(router *gin.RouterGroup) {

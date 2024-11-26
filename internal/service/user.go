@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"encoding/json"
 	"github.com/Lu271/rpc-test/hello-server/kitex_gen/hello"
 	"github.com/Lu271/rpc-test/hello-server/kitex_gen/hello/helloservice"
 	"github.com/Lu271/server-zys/internal/dao"
@@ -51,4 +52,17 @@ func SayHello(ctx context.Context) (*hello.HelloResponse, error) {
 		Message: "client request",
 	}
 	return cli.SayHello(ctx, req)
+}
+
+// SendHealth 发送健康信息
+func SendHealth(user *entity.User) {
+	resp, err := json.Marshal(&entity.Health{
+		ID:       user.ID,
+		IsHealth: true,
+	})
+
+	if err != nil {
+		return
+	}
+	user.Send <- resp
 }

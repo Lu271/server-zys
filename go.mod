@@ -9,6 +9,7 @@ require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-resty/resty/v2 v2.16.0
 	github.com/google/uuid v1.6.0
+	github.com/gorilla/websocket v1.4.2
 	github.com/kitex-contrib/registry-etcd v0.2.5
 	github.com/lestrrat-go/file-rotatelogs v2.4.0+incompatible
 	github.com/prometheus/client_golang v1.14.0
