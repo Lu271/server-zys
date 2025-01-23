@@ -5,9 +5,11 @@ server:
   idleTimeOut: 100s
 mysql:
   - instance: default
-    dsn: root:123456@tcp(127.0.0.1:3306)/mall?charset=utf8mb4&loc=Local&parseTime=True&timeout=3s
+    dsn: root:Lushilong0207!@tcp(127.0.0.1:3306)/gamex?charset=utf8mb4&loc=Local&parseTime=True&timeout=3s
     trace_log: true
     slow_threshold: 100
+    name: root
+    password: Lushilong0207!
 redis:
   addr: 127.0.0.1:6379
   dialTimeOut: 100
